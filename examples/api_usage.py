@@ -136,12 +136,8 @@ def demonstrate_error_handling() -> None:
         
         try:
             if operation == "encode":
-                if isinstance(test_input, bytes):
-                    result = Base58.encode(test_input)
-                elif test_input is None:
-                    result = Base58.encode(b'')
-                else:
-                    result = Base58.encode(test_input.encode('utf-8'))
+                # Pass the input directly to trigger appropriate errors
+                result = Base58.encode(test_input)
                 print(f"Encoded: {result}")
             else:  # decode
                 result = Base58.decode(test_input)

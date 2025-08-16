@@ -756,11 +756,13 @@ def test_validation_exception_path():
         def __contains__(self, item):
             raise RuntimeError("Test exception")
     
-    # Temporarily replace the ALPHABET to trigger the exception
-    original_alphabet = Base58.ALPHABET
-    Base58.ALPHABET = BadAlphabet()
+    # Use monkeypatching to safely test the exception path
+    import pytest
     
-    try:
+    with pytest.MonkeyPatch().context() as m:
+        # Temporarily replace the ALPHABET to trigger the exception
+        m.setattr(Base58, 'ALPHABET', BadAlphabet())
+        
         # This should trigger the exception and return False
         result = Base58.is_valid("test")
         assert result is False, f"Expected False, got {result}"
@@ -772,9 +774,6 @@ def test_validation_exception_path():
         # Test with empty string to ensure exception path is covered
         result3 = Base58.is_valid("")
         assert result3 is False, f"Expected False, got {result3}"
-    finally:
-        # Restore the original alphabet
-        Base58.ALPHABET = original_alphabet
 
 
 def test_decode_num_zero_edge_case():
