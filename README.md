@@ -261,3 +261,15 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Changelog
+
+#### [2025.1.1] - 2025-01-15
+- Added comprehensive changelog section to README.md
+- Improved test suite organization and reliability
+- Enhanced single character decoding test logic with round-trip verification
+- Reorganized imports in test files for better code structure
+- Improved exception handling test coverage
+
+#### [2025.1.0] - 2025-08-16
+- Initial Commit
