@@ -113,8 +113,10 @@ def main() -> NoReturn:
     
     if command == "encode":
         encode_command(input_data)
+        sys.exit(0)
     elif command == "decode":
         decode_command(input_data)
+        sys.exit(0)
     else:
         print(f"Error: Unknown command '{command}'")
         print_usage()
