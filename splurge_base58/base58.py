@@ -120,9 +120,13 @@ class Base58:
         for char in base58_data[leading_ones:]:
             num = num * cls._BASE + cls.ALPHABET.index(char)
 
-        # Calculate minimum byte length
-        byte_length = (num.bit_length() + 7) // 8
-        result = num.to_bytes(byte_length, byteorder="big")
+        # Handle case where num is 0 (all remaining chars were '1')
+        if num == 0:
+            result = b""
+        else:
+            # Calculate minimum byte length
+            byte_length = (num.bit_length() + 7) // 8
+            result = num.to_bytes(byte_length, byteorder="big")
 
         # Add leading zeros for each leading '1' character
         return b"\x00" * leading_ones + result
