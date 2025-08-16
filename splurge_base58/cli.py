@@ -95,10 +95,6 @@ def decode_command(input_data: str) -> None:
     except UnicodeDecodeError:
         print("Error: Decoded data is not valid UTF-8")
         sys.exit(1)
-    except UnicodeEncodeError:
-        # Handle case where console can't display the decoded text
-        print("Error: Cannot display decoded data in current console encoding")
-        sys.exit(1)
 
 
 def main() -> NoReturn:
