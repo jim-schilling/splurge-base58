@@ -261,3 +261,11 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Changelog
+
+#### [2025.1.1]
+
+
+#### [2025.1.0] - 2025-08-16
+- Initial Commit
