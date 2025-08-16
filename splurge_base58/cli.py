@@ -13,7 +13,18 @@ from splurge_base58.base58 import Base58, Base58Error
 
 
 _MAX_ENCODE_INPUT_LENGTH = 2048
-_MAX_DECODE_INPUT_LENGTH = len(Base58.encode(b'a' * _MAX_ENCODE_INPUT_LENGTH))
+
+
+def _get_max_decode_input_length() -> int:
+    """
+    Calculate the maximum decode input length based on the maximum encode input length.
+    
+    This is calculated lazily to avoid circular dependencies during module import.
+    
+    Returns:
+        Maximum length for decode input in characters
+    """
+    return len(Base58.encode(b'a' * _MAX_ENCODE_INPUT_LENGTH))
 
 
 def print_usage() -> None:
@@ -28,7 +39,7 @@ def print_usage() -> None:
     print()
     print("Constraints:")
     print(f"  encode: max input length is {_MAX_ENCODE_INPUT_LENGTH} bytes")
-    print(f"  decode: max input length is {_MAX_DECODE_INPUT_LENGTH} characters")
+    print(f"  decode: max input length is {_get_max_decode_input_length()} characters")
 
 
 def encode_command(input_data: str) -> None:
@@ -68,8 +79,9 @@ def decode_command(input_data: str) -> None:
     Raises:
         SystemExit: If input is too long or decoding fails
     """
-    if len(input_data) > _MAX_DECODE_INPUT_LENGTH:
-        print(f"Error: Input length {len(input_data)} exceeds maximum of {_MAX_DECODE_INPUT_LENGTH}")
+    max_decode_length = _get_max_decode_input_length()
+    if len(input_data) > max_decode_length:
+        print(f"Error: Input length {len(input_data)} exceeds maximum of {max_decode_length}")
         sys.exit(1)
     
     try:
