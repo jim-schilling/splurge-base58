@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "splurge-base58"
-version = "2025.1.0"
+version = "2025.1.1"
 description = "Splurge Base58 Helper"
 readme = "README.md"
 license = "MIT"
